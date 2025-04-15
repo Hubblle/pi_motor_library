@@ -33,7 +33,7 @@ RESOLUTION = {'Full': (0, 0, 0),
 GPIO.output(MODE, RESOLUTION['1/32'])
 
 step_count = SPR
-delay = .0035 / 32
+delay = .004 / 32
 
 try :
     while True:
