@@ -33,7 +33,7 @@ RESOLUTION = {'Full': (0, 0, 0),
 GPIO.output(MODE, RESOLUTION['1/32'])
 
 step_count = SPR
-delay = .005 / 32
+delay = .002 / 32
 
 try :
     while True:
@@ -47,7 +47,7 @@ try :
 
         elif GPIO.input(SWITCH) == GPIO.HIGH :
             GPIO.output(DIR, CCW)
-            for x in range(step_count*3):
+            for x in range(step_count*5):
                 GPIO.output(STEP, GPIO.HIGH)
                 sleep(delay)
                 GPIO.output(STEP, GPIO.LOW)
