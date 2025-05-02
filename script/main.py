@@ -1,54 +1,43 @@
 from time import sleep
 import RPi.GPIO as GPIO
+from motor_lib import Motor
 
+Y_mottor_info = {
+    "DIR" : 3, # Direction GPIO Pin
+    "STEP" : 2, # Step GPIO Pin
+    "SWITCH" : 4 # Switch GPIO Pin
+}
 
-DIR = 20   # Direction GPIO Pin
-STEP = 21  # Step GPIO Pin
+X_mottor_info = {
+    "DIR" : 27, # Direction GPIO Pin
+    "STEP" : 17, # Step GPIO Pin
+    "SWITCH" : 22 # Switch GPIO Pin
+}
+
+Z_mottor_info = {
+    "DIR" : 9, # Direction GPIO Pin
+    "STEP" : 10, # Step GPIO Pin
+    "SWITCH" : 11 # Switch GPIO Pin
+}
+
 CW = 1     # Clockwise Rotation
 CCW = 0    # Counterclockwise Rotation
 SPR = 200   # Steps per Revolution (360 / 1.8)
-EN = 2
-SWITCH = 26
+EN = 18 # Enable GPIO Pin
 
-GPIO.setmode(GPIO.BCM)
+Y_mottor = Motor(Y_mottor_info)
+Y_mottor.setup()
 
-#Enable the board
-GPIO.setup(EN, GPIO.OUT)
-GPIO.output(EN, GPIO.LOW)
+X_mottor = Motor(X_mottor_info)
 
-#Setup the switch up
-GPIO.setup(SWITCH, GPIO.IN)
-
-GPIO.setup(DIR, GPIO.OUT)
-GPIO.setup(STEP, GPIO.OUT)
-GPIO.output(DIR, CW)
+Z_mottor = Motor(Z_mottor_info)
 
 
 step_count = SPR * 16
 delay = .004 / 16
 
-try :
-    while True:
-        print(GPIO.input(SWITCH))
-        if GPIO.input(SWITCH) == GPIO.LOW:
-            GPIO.output(DIR, CW)
-            GPIO.output(STEP, GPIO.HIGH)
-            sleep(delay)
-            GPIO.output(STEP, GPIO.LOW)
-            sleep(delay)
-
-        elif GPIO.input(SWITCH) == GPIO.HIGH :
-            GPIO.output(DIR, CCW)
-            for x in range(step_count*5):
-                GPIO.output(STEP, GPIO.HIGH)
-                sleep(delay)
-                GPIO.output(STEP, GPIO.LOW)
-                sleep(delay)
-
-except :
-    GPIO.output(EN, GPIO.HIGH)
-    GPIO.cleanup()
-    exit()
+Y_mottor.high(SPR)
+Y_mottor.low(SPR)
 
 #stop the board and cleanup
 GPIO.output(EN, GPIO.HIGH)
