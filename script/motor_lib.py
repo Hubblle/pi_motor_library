@@ -33,8 +33,8 @@ class Motor:
     def high(self, step : int):
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
-            print("Aborting the program !")
-            return exit()
+            return print("Aborting the program !")
+
         
         GPIO.output(self.DIR, 1)
         print(f"The motor {self.name} is going up for {step} 1/16 steps.")
@@ -49,8 +49,8 @@ class Motor:
     def down(self, step : int) :
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
-            print("Aborting the program !")
-            return exit()
+            return print("Aborting the program !")
+
         
         GPIO.output(self.DIR, 0)
         print(f"The motor {self.name} is going down for {step} 1/16 steps.")
@@ -65,8 +65,8 @@ class Motor:
     def reset(self):
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
-            print("Aborting the program !")
-            return exit()
+            return print("Aborting the program !")
+
         
         print(f"Setting the motor {self.name} to 0 on the main axis.")
         GPIO.output(self.DIR, 1)
