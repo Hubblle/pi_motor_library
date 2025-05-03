@@ -44,6 +44,7 @@ class Motor:
             GPIO.output(self.STEP, GPIO.LOW)
             sleep(delay)
      
+     
     def move(self, step : int):
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
@@ -53,7 +54,7 @@ class Motor:
             self.high(step)
         
         else :
-            self.down(step * -1)
+            self.down(abs(step))
      
             
     def down(self, step : int) :
