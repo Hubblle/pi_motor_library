@@ -24,6 +24,8 @@ class Motor:
             #setup the DIR and STEP pin
             GPIO.setup(self.DIR, GPIO.OUT)
             GPIO.setup(self.STEP, GPIO.OUT)
+            GPIO.output(self.STEP, GPIO.LOW)
+            GPIO.output(self.DIR, 1)
             self.is_setup = 1
         except Exception as e:
             return print(e)

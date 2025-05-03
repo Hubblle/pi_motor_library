@@ -40,6 +40,7 @@ step_count = SPR * 16
 delay = .004 / 16
 
 try:
+    input("Press enter to start the program.")
     Y_motor.high(SPR)
     Y_motor.down(SPR)
     Y_motor.reset()
