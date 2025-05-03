@@ -100,7 +100,10 @@ class Stylus():
         self.coordinate = None
         
     def add_motor(self, motor : object, axis : str):
-        #first verify if an object from the motor class
+        #cannot add a motor if the stylus was already setup :
+        if not self.coordinate == None :
+            return("The stylus was already setup, please add the motor before the setup.")
+        #verify if the argument motor is an object from the motor class
         if not isinstance(motor, Motor)  :
             return print(f"Error, the motor {motor} isn't a motor.")
         #check if the axis is fine
@@ -121,6 +124,10 @@ class Stylus():
         self.coordinate = [0, 0, 0]
         
     def go_to(self, next_coordinate : list):
+        #cannot move if the stylus isn't setup :
+        if self.coordinate == None :
+            return print("Error, the stylus wasn't setup yet.")
+        
         for i in range(3) :
             if next_coordinate[i] - self.coordinate[i] != 0 and exec(f"self.{self.co_list[i]}_motor") == None :
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
@@ -132,6 +139,8 @@ class Stylus():
                 mouvement = next_coordinate[i] - self.coordinate[i]
                 exec(f"self.{self.co_list[i]}_motor.move({mouvement})")
                 self.coordinate[i] = next_coordinate[i]
+                
+        
                 
         
                 
