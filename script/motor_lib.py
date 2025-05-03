@@ -31,10 +31,11 @@ class Motor:
     def high(self, step : int):
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
-            return print("Aborting the program !")
+            print("Aborting the program !")
+            return exit()
         
         GPIO.output(self.DIR, 1)
-        print(f"The motor {self} is going up for {step} 1/16 steps.")
+        print(f"The motor {self.name} is going up for {step} 1/16 steps.")
         for i in range(step):
             GPIO.output(self.STEP, GPIO.HIGH)
             sleep(delay)
@@ -46,10 +47,11 @@ class Motor:
     def down(self, step : int) :
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
-            return print("Aborting the program !")
+            print("Aborting the program !")
+            return exit()
         
         GPIO.output(self.DIR, 0)
-        print(f"The motor {self} is going down for {step} 1/16 steps.")
+        print(f"The motor {self.name} is going down for {step} 1/16 steps.")
         for i in range(step):
             GPIO.output(self.STEP, GPIO.HIGH)
             sleep(delay)
@@ -61,13 +63,14 @@ class Motor:
     def reset(self):
         if self.is_setup == 0:
             print("This mottor wasn't setup.")
-            return print("Aborting the program !")
+            print("Aborting the program !")
+            return exit()
         
-        print("Seting the motor to 0 on the axis.")
+        print(f"Setting the motor {self.name} to 0 on the axis.")
         GPIO.output(self.DIR, 1)
         while True :
             if GPIO.input(self.SWITCH) == 1 :
-                return print("The motor was set to 0 on the main axis !")
+                return print(f"The motor {self.name} was set to 0 on the main axis !")
             elif GPIO.input(self.SWITCH) == 0 :
                 GPIO.output(self.STEP, GPIO.HIGH)
                 sleep(delay)
