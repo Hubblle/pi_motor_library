@@ -90,6 +90,10 @@ class Motor:
                 sleep(delay)
                 
                 
+                
+                
+                
+                
 class Stylus():
     def __init__(self, max : list):
         self.Y_motor = None
