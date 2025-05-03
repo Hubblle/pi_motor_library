@@ -140,7 +140,16 @@ class Stylus():
                 exec(f"self.{self.co_list[i]}_motor.move({mouvement})")
                 self.coordinate[i] = next_coordinate[i]
                 
-        
+    def center(self):
+        for i in range(3) :
+            if exec(f"self.{self.co_list[i]}_motor") == None :
+                return
+
+            else :
+                destination = self.max[i] / 2
+                mouvement = destination - self.coordinate[i]
+                exec(f"self.{self.co_list[i]}_motor.move({mouvement})")
+                self.coordinate[i] = destination
                 
         
                 
