@@ -25,6 +25,9 @@ CCW = 0    # Counterclockwise Rotation
 SPR = 200   # Steps per Revolution (360 / 1.8)
 EN = 18 # Enable GPIO Pin
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(EN, GPIO.OUT)
+
 Y_motor = Motor(Y_motor_info, "Y_motor")
 Y_motor.setup()
 
