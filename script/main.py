@@ -1,6 +1,6 @@
 from time import sleep
 import RPi.GPIO as GPIO
-from motor_lib import Motor
+from motor_lib import Motor, Stylus
 
 Z_motor_info = {
     "DIR" : 3, # Direction GPIO Pin
@@ -35,6 +35,9 @@ X_motor = Motor(X_motor_info, "X_motor")
 
 Z_motor = Motor(Z_motor_info, "Z_motor")
 
+Main_stylus = Stylus([1, 5000, 1])
+Main_stylus.add_motor(Y_motor, "Y")
+Main_stylus.setup()
 
 step_count = SPR * 16
 delay = .004 / 16
