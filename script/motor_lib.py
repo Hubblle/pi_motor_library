@@ -78,3 +78,18 @@ class Motor:
                 sleep(delay)
                 GPIO.output(self.STEP, GPIO.LOW)
                 sleep(delay)
+                
+                
+class Stylus():
+    def __init__(self):
+        self.Y_motor = None
+        self.X_motor = None
+        self.Z_motor = None
+        self.coordinate = None
+        
+    def add_motor(self, motor, axis):
+        #first verify if an object from the motor class
+        if not motor == Motor :
+            return print(f"Error, the motor {motor} isn't a motor.")
+
+    
