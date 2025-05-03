@@ -39,11 +39,18 @@ Z_motor = Motor(Z_motor_info, "Z_motor")
 step_count = SPR * 16
 delay = .004 / 16
 
-Y_motor.high(SPR)
-Y_motor.down(SPR)
-Y_motor.reset()
-Y_motor.down(step_count)
+try:
+    Y_motor.high(SPR)
+    Y_motor.down(SPR)
+    Y_motor.reset()
+    Y_motor.down(step_count)
+except KeyboardInterrupt :
+    #stop the board and cleanup
+    GPIO.output(EN, GPIO.HIGH)
+    GPIO.cleanup()
+    exit()
 
 #stop the board and cleanup
 GPIO.output(EN, GPIO.HIGH)
 GPIO.cleanup()
+exit()
