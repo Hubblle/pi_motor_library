@@ -41,10 +41,9 @@ delay = .004 / 16
 
 try:
     input("Press enter to start the program.")
-    Y_motor.high(SPR)
-    Y_motor.down(SPR)
-    Y_motor.reset()
-    Y_motor.down(step_count)
+    while True:
+        Y_motor.high(SPR)
+        Y_motor.down(SPR)
 except KeyboardInterrupt :
     #stop the board and cleanup
     GPIO.output(EN, GPIO.HIGH)
