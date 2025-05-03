@@ -44,6 +44,16 @@ class Motor:
             GPIO.output(self.STEP, GPIO.LOW)
             sleep(delay)
      
+    def move(self, step : int):
+        if self.is_setup == 0:
+            print("This mottor wasn't setup.")
+            return print("Aborting the program !")
+        
+        if step > 0:
+            self.high(step)
+        
+        else :
+            self.down(step * -1)
      
             
     def down(self, step : int) :
@@ -81,15 +91,49 @@ class Motor:
                 
                 
 class Stylus():
-    def __init__(self):
+    def __init__(self, max : list):
         self.Y_motor = None
         self.X_motor = None
         self.Z_motor = None
+        self.co_list = ["X", "Y", "Z"]
+        self.max = max
         self.coordinate = None
         
-    def add_motor(self, motor, axis):
+    def add_motor(self, motor : object, axis : str):
         #first verify if an object from the motor class
-        if not motor == Motor :
+        if not isinstance(motor, Motor)  :
             return print(f"Error, the motor {motor} isn't a motor.")
+        #check if the axis is fine
+        if not axis in ["X", "Y", "Z"] :
+            return print("The selected axis isn't right !")
+        
+        #add the motor to the coresponding axis
+        exec(f"self.{axis}_motor = motor")
+        return print(f"The motor {motor.name} was sucessfully added to the {axis} axis.")
+    
+    def setup(self):
+        #first set all the motors to 0
+        for i in [self.X_motor, self.Y_motor, self.Z_motor] :
+            if not i == None:
+                i.reset
+        
+        #set the coordinate to the default
+        self.coordinate = [0, 0, 0]
+        
+    def go_to(self, next_coordinate : list):
+        for i in range(3) :
+            if next_coordinate[i] - self.coordinate[i] != 0 and exec(f"self.{self.co_list[i]}_motor") == None :
+                return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
+            
+            elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
+                return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
+            
+            else :
+                mouvement = next_coordinate[i] - self.coordinate[i]
+                exec(f"self.{self.co_list[i]}_motor.move({mouvement})")
+                self.coordinate[i] = next_coordinate[i]
+                
+        
+                
 
     
