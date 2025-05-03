@@ -66,7 +66,7 @@ class Motor:
             print("Aborting the program !")
             return exit()
         
-        print(f"Setting the motor {self.name} to 0 on the axis.")
+        print(f"Setting the motor {self.name} to 0 on the main axis.")
         GPIO.output(self.DIR, 1)
         while True :
             if GPIO.input(self.SWITCH) == 1 :
