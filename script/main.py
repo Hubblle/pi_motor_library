@@ -45,7 +45,7 @@ delay = .004 / 16
 try:
     input("Press enter to start the program.")
     while True:
-        if GPIO.input(Y_motor_info["SWITCH"]) == 1:
+        if GPIO.input(Y_motor_info["SWITCH"]) == GPIO.HIGH:
             print(1)
             
 except KeyboardInterrupt :
