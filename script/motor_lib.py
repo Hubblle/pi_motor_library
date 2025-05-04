@@ -126,6 +126,7 @@ class Stylus():
                 i.reset
                 print(f"Reseting the {i.name} motor")
         
+        print("The Stylus was setup sucessfully")
         #set the coordinate to the default
         self.coordinate = [0, 0, 0]
         
