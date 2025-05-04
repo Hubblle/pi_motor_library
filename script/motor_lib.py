@@ -101,8 +101,6 @@ class Stylus():
         self.Y_motor = None
         self.X_motor = None
         self.Z_motor = None
-        self.co_list = ["X", "Y", "Z"]
-        self.motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
         self.max = max
         self.coordinate = None
         
