@@ -118,12 +118,16 @@ class Stylus():
             return print("The selected axis isn't right !")
         
         #add the motor to the coresponding axis
-        exec(f"self.{axis}_motor = motor")
+        for i in range(3):
+            if self.co_list[i] == axis :
+                index = i
+
+        self.motor_list[i]=motor
         return print(f"The motor {motor.name} was sucessfully added to the {axis} axis.")
     
     def setup(self):
         #first set all the motors to 0
-        for i in [self.X_motor, self.Y_motor, self.Z_motor] :
+        for i in self.motor_list :
             if not i == None:
                 i.reset()
                 print(f"Reseting the {i.name} motor")
