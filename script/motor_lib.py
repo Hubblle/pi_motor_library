@@ -5,6 +5,15 @@ SPR = 200   # Steps per Revolution (360 / 1.8)
 SPR = SPR * 16
 delay = .004 / 16
 
+def locate(element, input_list : list) :
+    for i in range(len(input_list)) :
+        if input_list[i] == element:
+            return i
+        
+    return None
+        
+        
+
 class Motor:
     def __init__(self, motor_info : dict, name : str):
         self.motor_info = motor_info
@@ -101,6 +110,7 @@ class Stylus():
         self.Y_motor = None
         self.X_motor = None
         self.Z_motor = None
+        self.co_list = ["X", "Y", "Z"]
         self.max = max
         self.coordinate = None
         
@@ -143,7 +153,7 @@ class Stylus():
             return print("Error, the stylus wasn't setup yet.")
         
         a = 0
-        for i in motor_list :
+        for i in self.co_list :
             if next_coordinate[a] - self.coordinate[a] != 0 and i == None :
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[a]} motor.")
             
@@ -152,9 +162,7 @@ class Stylus():
             
             else :
                 mouvement = next_coordinate[a] - self.coordinate[a]
-                print(i)
-                i.move(mouvement)
-                self.coordinate[a] = next_coordinate[a]
+                self.move_axis(i, mouvement)
             a += 1
                 
     def center(self):
@@ -171,7 +179,20 @@ class Stylus():
                 self.coordinate[a] = destination
                 a += 1
                 
-        
+    def move_axis(self, axis : str, movement : int) :
+        i = locate(axis, self.co_list)
+        if self.coordinate[i] + movement < 0 or self.coordinate[i] + movement > self.max[i] :
+            return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
                 
+        if axis == "X" :
+            self.X_motor.move(movement)
+        elif axis == "Y" :
+            self.Y_motor.move(movement)
+        elif axis == "Z" :
+            self.Z_motor.move(movement)
+        else :
+            return print("Error, the axis you gaved isn't right.")
+        
+        self.coordinate[i] += movement
 
     
