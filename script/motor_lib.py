@@ -102,6 +102,7 @@ class Stylus():
         self.X_motor = None
         self.Z_motor = None
         self.co_list = ["X", "Y", "Z"]
+        self.motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
         self.max = max
         self.coordinate = None
         
@@ -137,7 +138,7 @@ class Stylus():
             return print("Error, the stylus wasn't setup yet.")
         
         for i in range(3) :
-            if next_coordinate[i] - self.coordinate[i] != 0 and exec(f"self.{self.co_list[i]}_motor") == None :
+            if next_coordinate[i] - self.coordinate[i] != 0 and self.motor_list[i] == None :
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
             
             elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
@@ -145,18 +146,18 @@ class Stylus():
             
             else :
                 mouvement = next_coordinate[i] - self.coordinate[i]
-                exec(f"self.{self.co_list[i]}_motor.move({mouvement})")
+                self.motor_list[i].move(mouvement)
                 self.coordinate[i] = next_coordinate[i]
                 
     def center(self):
         for i in range(3) :
-            if exec(f"self.{self.co_list[i]}_motor") == None :
+            if self.motor_list[i] == None :
                 return
 
             else :
                 destination = self.max[i] / 2
                 mouvement = destination - self.coordinate[i]
-                exec(f"self.{self.co_list[i]}_motor.move({mouvement})")
+                self.motor_list[i].move(mouvement)
                 self.coordinate[i] = destination
                 
         
