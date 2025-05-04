@@ -82,6 +82,7 @@ class Motor:
         print(f"Setting the motor {self.name} to 0 on the main axis.")
         GPIO.output(self.DIR, 1)
         while True :
+            print(GPIO.input(self.SWITCH))
             if GPIO.input(self.SWITCH) == 1 :
                 return print(f"The motor {self.name} was set to 0 on the main axis !")
             elif GPIO.input(self.SWITCH) == 0 :
