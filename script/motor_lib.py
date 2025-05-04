@@ -16,7 +16,6 @@ class Motor:
         
 
     def setup(self):
-        motor = self.motor_info
         try :
             GPIO.setmode(GPIO.BCM)
             #Setup the switch up
@@ -27,6 +26,7 @@ class Motor:
             GPIO.output(self.STEP, GPIO.LOW)
             GPIO.output(self.DIR, 1)
             self.is_setup = 1
+            print(f"The motor {self.name} was setup sucessfully.")
         except Exception as e:
             return print(e)
         
@@ -124,6 +124,7 @@ class Stylus():
         for i in [self.X_motor, self.Y_motor, self.Z_motor] :
             if not i == None:
                 i.reset
+                print(f"Reseting the {i.name} motor")
         
         #set the coordinate to the default
         self.coordinate = [0, 0, 0]
