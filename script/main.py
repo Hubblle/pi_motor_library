@@ -29,7 +29,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN, GPIO.OUT)
 
 Y_motor = Motor(Y_motor_info, "Y_motor")
-Y_motor.setup
+Y_motor.setup()
 
 X_motor = Motor(X_motor_info, "X_motor")
 
