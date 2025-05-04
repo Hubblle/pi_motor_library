@@ -146,6 +146,7 @@ class Stylus():
             
             else :
                 mouvement = next_coordinate[i] - self.coordinate[i]
+                print(self.motor_list[i])
                 self.motor_list[i].move(mouvement)
                 self.coordinate[i] = next_coordinate[i]
                 
