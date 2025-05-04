@@ -123,7 +123,7 @@ class Stylus():
         #first set all the motors to 0
         for i in [self.X_motor, self.Y_motor, self.Z_motor] :
             if not i == None:
-                i.reset
+                i.reset()
                 print(f"Reseting the {i.name} motor")
         
         print("The Stylus was setup sucessfully")
