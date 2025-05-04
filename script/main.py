@@ -37,7 +37,7 @@ Z_motor = Motor(Z_motor_info, "Z_motor")
 
 
 Main_stylus = Stylus([1, 5000, 1])
-Main_stylus.add_motor(Y_motor(), "Y")
+Main_stylus.add_motor(Y_motor, "Y")
 Main_stylus.setup()
 
 step_count = SPR * 16
