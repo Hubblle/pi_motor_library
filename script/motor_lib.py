@@ -144,30 +144,32 @@ class Stylus():
         
         a = 0
         for i in motor_list :
-            if next_coordinate[i] - self.coordinate[i] != 0 and motor_list[i] == None :
-                return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
+            if next_coordinate[a] - self.coordinate[a] != 0 and i == None :
+                return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[a]} motor.")
             
-            elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
-                return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
+            elif next_coordinate[a] > self.max[a] or next_coordinate[a] < 0 :
+                return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[a]} axis is {self.max[a]} and min is 0, you tried {next_coordinate[a]}")
             
             else :
-                mouvement = next_coordinate[i] - self.coordinate[i]
+                mouvement = next_coordinate[a] - self.coordinate[a]
                 print(i)
                 i.move(mouvement)
-                self.coordinate[i] = next_coordinate[i]
+                self.coordinate[a] = next_coordinate[a]
             a += 1
                 
     def center(self):
         motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
+        a = 0
         for i in motor_list :
             if i == None :
                 return
 
             else :
-                destination = self.max[i] / 2
-                mouvement = destination - self.coordinate[i]
+                destination = self.max[a] / 2
+                mouvement = destination - self.coordinate[a]
                 i.move(mouvement)
-                self.coordinate[i] = destination
+                self.coordinate[a] = destination
+                a += 1
                 
         
                 
