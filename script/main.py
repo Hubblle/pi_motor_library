@@ -27,28 +27,27 @@ EN = 18 # Enable GPIO Pin
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN, GPIO.OUT)
-GPIO.setup(Y_motor_info["SWITCH"], GPIO.IN)
+
 Y_motor = Motor(Y_motor_info, "Y_motor")
+Y_motor.setup
 
 X_motor = Motor(X_motor_info, "X_motor")
 
 Z_motor = Motor(Z_motor_info, "Z_motor")
 
-"""
+
 Main_stylus = Stylus([1, 5000, 1])
 Main_stylus.add_motor(Y_motor, "Y")
-Main_stylus.setup()"""
+Main_stylus.setup()
 
 step_count = SPR * 16
 delay = .004 / 16
 
 try:
     input("Press enter to start the program.")
-    i = 0
-    while True:
-        if GPIO.input(Y_motor_info["SWITCH"]) == GPIO.HIGH:
-            i += 1
-            print(i)
+    Main_stylus.go_to([0, 1000, 0])
+    sleep(1)
+    Main_stylus.go_to([0, 0, 0])
             
 except KeyboardInterrupt :
     #stop the board and cleanup
