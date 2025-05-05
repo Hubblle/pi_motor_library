@@ -140,7 +140,7 @@ class Stylus():
         for motor in [self.X_motor, self.Y_motor, self.Z_motor] :
             if not motor == None:
                 motor.reset()
-                print(f"Reseting the {i.name} motor")
+                print(f"Reseting the {motor.name} motor")
         
         print("The Stylus was setup sucessfully")
         #set the coordinate to the default
