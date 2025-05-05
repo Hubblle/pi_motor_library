@@ -36,7 +36,7 @@ X_motor = Motor(X_motor_info, "X_motor")
 Z_motor = Motor(Z_motor_info, "Z_motor")
 
 
-Main_stylus = Stylus([1, 5000, 1])
+Main_stylus = Stylus([1, 10000, 1])
 Main_stylus.add_motor(Y_motor, "Y")
 Main_stylus.setup()
 
@@ -44,7 +44,7 @@ step_count = SPR * 16
 
 try:
     input("Press enter to start the program.")
-    Main_stylus.go_to([0, 1000, 0])
+    Main_stylus.go_to([0, 5000, 0])
     sleep(1)
     Main_stylus.go_to([0, 0, 0])
     Main_stylus.center()
