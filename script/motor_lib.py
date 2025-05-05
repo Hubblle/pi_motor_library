@@ -160,7 +160,7 @@ class Stylus():
             elif next_coordinate[a] > self.max[a] or next_coordinate[a] < 0 :
                 return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[a]} axis is {self.max[a]} and min is 0, you tried {next_coordinate[a]}")
             
-            else :
+            elif next_coordinate[a] != self.coordinate[a] :
                 mouvement = next_coordinate[a] - self.coordinate[a]
                 self.move_axis(i, mouvement)
             a += 1
