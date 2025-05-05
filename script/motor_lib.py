@@ -47,10 +47,11 @@ class Motor:
         
         GPIO.output(self.DIR, 1)
         print(f"The motor {self.name} is going up for {step} 1/16 steps.")
+        STEP = self.STEP
         for i in range(step):
-            GPIO.output(self.STEP, GPIO.HIGH)
+            GPIO.output(STEP, 1)
             sleep(delay)
-            GPIO.output(self.STEP, GPIO.LOW)
+            GPIO.output(STEP, 0)
             sleep(delay)
      
      
