@@ -153,7 +153,7 @@ class Stylus():
             return print("Error, the stylus wasn't setup yet.")
         
 
-        for i in len(self.co_list) :
+        for i in range(len(self.co_list)) :
             if next_coordinate[i] - self.coordinate[i] != 0 and i == None :
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[a]} motor.")
             
