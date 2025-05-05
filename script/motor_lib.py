@@ -93,7 +93,11 @@ class Motor:
         while True :
             print(GPIO.input(self.SWITCH))
             if GPIO.input(self.SWITCH) == 1 :
-                return print(f"The motor {self.name} was set to 0 on the main axis !")
+                sleep(0.2)
+                if GPIO.input(self.SWITCH) == 0 :
+                    pass
+                elif GPIO.input(self.SWITCH) == 1:
+                    return print(f"The motor {self.name} was set to 0 on the main axis !")
             elif GPIO.input(self.SWITCH) == 0 :
                 GPIO.output(self.STEP, GPIO.HIGH)
                 sleep(delay)
