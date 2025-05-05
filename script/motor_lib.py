@@ -179,7 +179,7 @@ class Stylus():
                 a += 1
                 
     def move_axis(self, axis : str, movement : int) :
-        i = locate(axis, self.co_list)
+        i = axis
         if self.coordinate[i] + movement < 0 or self.coordinate[i] + movement > self.max[i] :
             return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
                 
