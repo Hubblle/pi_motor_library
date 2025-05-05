@@ -48,6 +48,8 @@ try:
     Main_stylus.go_to([0, 1000, 0])
     sleep(1)
     Main_stylus.go_to([0, 0, 0])
+    Main_stylus.center()
+    Main_stylus.go_to([0, 0, 0])
             
 except KeyboardInterrupt :
     #stop the board and cleanup
