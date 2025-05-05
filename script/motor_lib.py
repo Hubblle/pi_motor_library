@@ -183,11 +183,11 @@ class Stylus():
         if self.coordinate[i] + movement < 0 or self.coordinate[i] + movement > self.max[i] :
             return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
                 
-        if axis == 1 :
+        if axis == 0 :
             self.X_motor.move(movement)
-        elif axis == 2 :
+        elif axis == 1 :
             self.Y_motor.move(movement)
-        elif axis == 3 :
+        elif axis == 2 :
             self.Z_motor.move(movement)
         else :
             return print("Error, the axis you gaved isn't right.")
