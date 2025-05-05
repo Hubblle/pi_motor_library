@@ -137,9 +137,9 @@ class Stylus():
     
     def setup(self):
         #first set all the motors to 0
-        for i in [self.X_motor, self.Y_motor, self.Z_motor] :
-            if not i == None:
-                i.reset()
+        for motor in [self.X_motor, self.Y_motor, self.Z_motor] :
+            if not motor == None:
+                motor.reset()
                 print(f"Reseting the {i.name} motor")
         
         print("The Stylus was setup sucessfully")
@@ -152,18 +152,17 @@ class Stylus():
         if self.coordinate == None :
             return print("Error, the stylus wasn't setup yet.")
         
-        a = 0
-        for i in self.co_list :
-            if next_coordinate[a] - self.coordinate[a] != 0 and i == None :
+
+        for i in len(self.co_list) :
+            if next_coordinate[i] - self.coordinate[i] != 0 and i == None :
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[a]} motor.")
             
-            elif next_coordinate[a] > self.max[a] or next_coordinate[a] < 0 :
+            elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
                 return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[a]} axis is {self.max[a]} and min is 0, you tried {next_coordinate[a]}")
             
-            elif next_coordinate[a] != self.coordinate[a] :
-                mouvement = next_coordinate[a] - self.coordinate[a]
+            elif next_coordinate[i] != self.coordinate[i] :
+                mouvement = next_coordinate[i] - self.coordinate[i]
                 self.move_axis(i, mouvement)
-            a += 1
                 
     def center(self):
         motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
@@ -184,11 +183,11 @@ class Stylus():
         if self.coordinate[i] + movement < 0 or self.coordinate[i] + movement > self.max[i] :
             return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
                 
-        if axis == "X" :
+        if axis == 1 :
             self.X_motor.move(movement)
-        elif axis == "Y" :
+        elif axis == 2 :
             self.Y_motor.move(movement)
-        elif axis == "Z" :
+        elif axis == 3 :
             self.Z_motor.move(movement)
         else :
             return print("Error, the axis you gaved isn't right.")
