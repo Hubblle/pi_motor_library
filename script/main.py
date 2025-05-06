@@ -31,9 +31,9 @@ GPIO.setup(EN, GPIO.OUT)
 Y_motor = Motor(Y_motor_info, "Y_motor", 1, 0)
 Y_motor.setup()
 
-X_motor = Motor(X_motor_info, "X_motor")
+X_motor = Motor(X_motor_info, "X_motor", 0, 1)
 
-Z_motor = Motor(Z_motor_info, "Z_motor")
+Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1)
 
 
 Main_stylus = Stylus([1, 10000, 1])
