@@ -46,7 +46,8 @@ try:
     input("Press enter to start the program.")
     Main_stylus.go_to([0, 5000, 0])
     sleep(1)
-    Main_stylus.go_to([0, 0, 0])
+    Main_stylus.go_to([0, 1, 0])
+    sleep(5)
     Main_stylus.center()
     Main_stylus.go_to([0, 0, 0])
             
