@@ -15,13 +15,15 @@ def locate(element, input_list : list) :
         
 
 class Motor:
-    def __init__(self, motor_info : dict, name : str):
+    def __init__(self, motor_info : dict, name : str, d_d : int, d_u : int):
         self.motor_info = motor_info
         self.is_setup = 0
         self.name = name
         self.DIR = motor_info["DIR"]
         self.SWITCH = motor_info["SWITCH"]
         self.STEP = motor_info["STEP"]
+        self.dir_down = d_d
+        self.dir_up = d_u
         
 
     def setup(self):
@@ -45,7 +47,7 @@ class Motor:
             return print("Aborting the program !")
 
         
-        GPIO.output(self.DIR, 1)
+        GPIO.output(self.DIR, self.dir_up)
         print(f"The motor {self.name} is going up for {step} 1/16 steps.")
         STEP = self.STEP
         for i in range(step):
@@ -73,7 +75,7 @@ class Motor:
             return print("Aborting the program !")
 
         
-        GPIO.output(self.DIR, 0)
+        GPIO.output(self.DIR, self.dir_down)
         print(f"The motor {self.name} is going down for {step} 1/16 steps.")
         for i in range(step):
             GPIO.output(self.STEP, GPIO.HIGH)
@@ -90,7 +92,7 @@ class Motor:
 
         
         print(f"Setting the motor {self.name} to 0 on the main axis.")
-        GPIO.output(self.DIR, 0)
+        GPIO.output(self.DIR, self.dir_down)
         while True :
             print(GPIO.input(self.SWITCH))
             if GPIO.input(self.SWITCH) == 1 :
