@@ -2,13 +2,13 @@ from time import sleep
 import RPi.GPIO as GPIO
 from motor_lib import Motor, Stylus
 
-X_motor_info = {
+Z_motor_info = {
     "DIR" : 3, # Direction GPIO Pin
     "STEP" : 2, # Step GPIO Pin
     "SWITCH" : 4 # Switch GPIO Pin
 }
 
-Z_motor_info = {
+X_motor_info = {
     "DIR" : 27, # Direction GPIO Pin
     "STEP" : 17, # Step GPIO Pin
     "SWITCH" : 22 # Switch GPIO Pin
