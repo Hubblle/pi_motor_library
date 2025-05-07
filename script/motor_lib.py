@@ -185,10 +185,10 @@ class Stylus():
 
         for i in range(len(self.co_list)) :
             if next_coordinate[i] - self.coordinate[i] != 0 and i == None :
-                return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[a]} motor.")
+                return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
             
             elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
-                return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[a]} axis is {self.max[a]} and min is 0, you tried {next_coordinate[a]}")
+                return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
             
             elif next_coordinate[i] != self.coordinate[i] :
                 mouvement = next_coordinate[i] - self.coordinate[i]
@@ -211,7 +211,7 @@ class Stylus():
     def move_axis(self, axis : str, movement : int) :
         i = axis
         if self.coordinate[i] + movement < 0 or self.coordinate[i] + movement > self.max[i] :
-            return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
+            return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {self.coordinate[i] + movement}")
                 
         if axis == 0 :
             self.X_motor.move(movement)
