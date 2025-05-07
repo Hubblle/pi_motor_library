@@ -48,7 +48,9 @@ try:
     input("Press enter to start the program")
     while True :
         user_input = input("Please, enter the next coordinates :")
-        next_co  = list(int(user_input.split(", ")))
+        next_co  = list(user_input.split(", "))
+        for i in len(next_co) :
+            next_co[i] = int(next_co[i])
         Stylus.go_to(next_co)
             
 except KeyboardInterrupt :
