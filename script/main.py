@@ -51,7 +51,7 @@ try:
         next_co  = list(user_input.split(", "))
         for i in range(len(next_co)) :
             next_co[i] = int(next_co[i])
-        Stylus.go_to(next_co)
+        Main_stylus.go_to(next_co)
             
 except KeyboardInterrupt :
     #stop the board and cleanup
