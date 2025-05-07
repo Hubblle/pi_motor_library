@@ -36,20 +36,21 @@ X_motor = Motor(X_motor_info, "X_motor", 0, 1)
 Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1)
 
 
-Main_stylus = Stylus([1, 2000, 1])
+"""Main_stylus = Stylus([1, 2000, 1])
 Main_stylus.add_motor(Y_motor, "Y")
-Main_stylus.setup()
+Main_stylus.setup()"""
 
 step_count = SPR * 16
 
 try:
     input("Press enter to start the program.")
-    Main_stylus.go_to([0, 1000, 0])
+    Y_motor.get_max()
+    """Main_stylus.go_to([0, 1000, 0])
     sleep(1)
     Main_stylus.go_to([0, 999, 0])
     sleep(5)
     Main_stylus.center()
-    Main_stylus.go_to([0, 0, 0])
+    Main_stylus.go_to([0, 0, 0])"""
             
 except KeyboardInterrupt :
     #stop the board and cleanup
