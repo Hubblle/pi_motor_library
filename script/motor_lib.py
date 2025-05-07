@@ -115,6 +115,7 @@ class Motor:
         print("Warning ! If the motor is not placed at his maximum, the result could be falsed.")
         input("Press enter to confirm.")
         motor_max = 0
+        GPIO.output(self.DIR, self.dir_down)
         while True :
             print(GPIO.input(self.SWITCH))
             if GPIO.input(self.SWITCH) == 1 :
