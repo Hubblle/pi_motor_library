@@ -28,7 +28,7 @@ EN = 18 # Enable GPIO Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN, GPIO.OUT)
 
-Y_motor = Motor(Y_motor_info, "Y_motor", 1, 0)
+Y_motor = Motor(Y_motor_info, "Y_motor", 0, 1)
 Y_motor.setup()
 
 X_motor = Motor(X_motor_info, "X_motor", 0, 1)
