@@ -2,7 +2,7 @@ from time import sleep
 import RPi.GPIO as GPIO
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
-delay = 0.0005
+delay = 0.001
 
 def locate(element, input_list : list) :
     for i in range(len(input_list)) :
