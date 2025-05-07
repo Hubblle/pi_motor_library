@@ -106,6 +106,24 @@ class Motor:
                 GPIO.output(self.STEP, GPIO.LOW)
                 sleep(delay)
                 
+    def get_max(self):
+        print("Warning ! If the motor is not placed at his maximum, the result could be falsed.")
+        input("Press enter to confirm.")
+        motor_max = 0
+        while True :
+            print(GPIO.input(self.SWITCH))
+            if GPIO.input(self.SWITCH) == 1 :
+                sleep(0.2)
+                if GPIO.input(self.SWITCH) == 0 :
+                    pass
+                elif GPIO.input(self.SWITCH) == 1:
+                    return print(f"The motor {self.name} has a maximum of {motor_max} step.")
+            elif GPIO.input(self.SWITCH) == 0 :
+                motor_max += 1
+                GPIO.output(self.STEP, GPIO.HIGH)
+                sleep(delay)
+                GPIO.output(self.STEP, GPIO.LOW)
+                sleep(delay)        
                 
                 
                 
