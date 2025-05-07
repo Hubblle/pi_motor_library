@@ -46,7 +46,7 @@ try:
     while True:
         user_input = input("Press enter to go up, or q to quit.")
         if user_input == "" :
-            Y_motor.high(1)
+            Y_motor.high(5)
         elif user_input == "q" :
             break
     
