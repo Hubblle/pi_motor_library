@@ -28,7 +28,7 @@ EN = 18 # Enable GPIO Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN, GPIO.OUT)
 
-Y_motor = Motor(Y_motor_info, "Y_motor", 0, 1)
+Y_motor = Motor(Y_motor_info, "Y_motor", 1, 0)
 Y_motor.setup()
 
 X_motor = Motor(X_motor_info, "X_motor", 0, 1)
@@ -36,14 +36,20 @@ X_motor = Motor(X_motor_info, "X_motor", 0, 1)
 Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1)
 
 
-"""Main_stylus = Stylus([1, 2000, 1])
+"""Main_stylus = Stylus([1340, 1271, 1])
 Main_stylus.add_motor(Y_motor, "Y")
 Main_stylus.setup()"""
 
 step_count = SPR * 16
 
 try:
-    input("Press enter to start the program.")
+    while True:
+        user_input = input("Press enter to go up, or q to quit.")
+        if user_input == "" :
+            Y_motor.high(1)
+        elif user_input == "q" :
+            break
+    
     Y_motor.get_max()
     """Main_stylus.go_to([0, 1000, 0])
     sleep(1)
