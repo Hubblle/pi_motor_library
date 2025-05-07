@@ -107,6 +107,11 @@ class Motor:
                 sleep(delay)
                 
     def get_max(self):
+        if self.is_setup == 0:
+            print("This mottor wasn't setup.")
+            return print("Aborting the program !")
+        
+        
         print("Warning ! If the motor is not placed at his maximum, the result could be falsed.")
         input("Press enter to confirm.")
         motor_max = 0
