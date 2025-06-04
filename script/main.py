@@ -3,9 +3,9 @@ import RPi.GPIO as GPIO
 from motor_lib import Motor, Stylus
 
 Z_motor_info = {
-    "DIR" : 3, # Direction GPIO Pin
-    "STEP" : 2, # Step GPIO Pin
-    "SWITCH" : 4 # Switch GPIO Pin
+    "DIR" : 6, # Direction GPIO Pin
+    "STEP" : 5, # Step GPIO Pin
+    "SWITCH" : 13 # Switch GPIO Pin
 }
 
 X_motor_info = {
@@ -35,11 +35,13 @@ X_motor = Motor(X_motor_info, "X_motor", 0, 1)
 X_motor.setup()
 
 Z_motor = Motor(Z_motor_info, "Z_motor", 1, 0)
+Z_motor.setup()
 
 
 Main_stylus = Stylus([1340, 1271, 6530])
 Main_stylus.add_motor(Y_motor, "Y")
 Main_stylus.add_motor(X_motor, "X")
+Main_stylus.add_motor(Z_motor, "Z")
 Main_stylus.setup()
 
 step_count = SPR * 16
