@@ -196,17 +196,13 @@ class Stylus():
                 
     def center(self):
         motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
-        a = 0
-        for i in motor_list :
-            if i == None :
-                return
-
-            else :
-                destination = self.max[a] / 2
-                mouvement = destination - self.coordinate[a]
-                i.move(mouvement)
-                self.coordinate[a] = destination
-                a += 1
+        for i in range(len(motor_list)) :
+            
+            destination = self.max[i] / 2
+            movement = destination - self.coordinate[i]
+            self.move_axis(i, movement)
+            self.coordinate[i] = destination
+                
                 
     def move_axis(self, axis : str, movement : int) :
         i = axis
@@ -223,5 +219,11 @@ class Stylus():
             return print("Error, the axis you gaved isn't right.")
         
         self.coordinate[i] += movement
+        
+    def up(self) :
+        if self.Z_motor == None :
+            return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
+        else :
+            self.Z_motor.high(15)
 
     
