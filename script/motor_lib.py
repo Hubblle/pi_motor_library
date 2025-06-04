@@ -144,6 +144,8 @@ class Stylus():
         self.max = max
         self.coordinate = None
         
+        
+        
     def add_motor(self, motor : object, axis : str):
         #cannot add a motor if the stylus was already setup :
         if not self.coordinate == None :
@@ -165,6 +167,9 @@ class Stylus():
         
         return print(f"The motor {motor.name} was sucessfully added to the {axis} axis.")
     
+    
+    
+    
     def setup(self):
         #first set all the motors to 0
         for motor in [self.X_motor, self.Y_motor, self.Z_motor] :
@@ -176,6 +181,9 @@ class Stylus():
         #set the coordinate to the default
         self.coordinate = [0, 0, 0]
         
+        
+        
+        
     def go_to(self, next_coordinate : list):
         motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
         #cannot move if the stylus isn't setup :
@@ -184,7 +192,10 @@ class Stylus():
         
 
         for i in range(len(self.co_list)) :
-            if next_coordinate[i] - self.coordinate[i] != 0 and i == None :
+            if next_coordinate[i] == -1 :
+                pass
+            
+            elif next_coordinate[i] - self.coordinate[i] != 0 and i == None :
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
             
             elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
@@ -194,6 +205,9 @@ class Stylus():
                 mouvement = next_coordinate[i] - self.coordinate[i]
                 self.move_axis(i, mouvement)
                 
+                
+                
+                
     def center(self):
         motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
         for i in range(len(motor_list)) :
@@ -202,6 +216,7 @@ class Stylus():
             movement = destination - self.coordinate[i]
             self.move_axis(i, movement)
             self.coordinate[i] = destination
+                
                 
                 
     def move_axis(self, axis : str, movement : int) :
@@ -220,10 +235,15 @@ class Stylus():
         
         self.coordinate[i] += movement
         
+        
+        
     def up(self) :
         if self.Z_motor == None :
             return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
         else :
-            self.Z_motor.high(15)
+            self.go_to([-1, -1, 15])
+            return print("The Stylus is up /!\ ")
+    
+    
 
     
