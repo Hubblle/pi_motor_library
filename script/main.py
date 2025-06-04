@@ -34,7 +34,7 @@ Y_motor.setup()
 X_motor = Motor(X_motor_info, "X_motor", 0, 1)
 X_motor.setup()
 
-Z_motor = Motor(Z_motor_info, "Z_motor", 1, 0)
+Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1)
 Z_motor.setup()
 
 
