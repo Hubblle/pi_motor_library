@@ -1,8 +1,9 @@
 from time import sleep
 import RPi.GPIO as GPIO
+import math
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
-delay = 0.001
+delay = 0.005
 
 def locate(element, input_list : list) :
     for i in range(len(input_list)) :
@@ -143,6 +144,7 @@ class Stylus():
         self.co_list = ["X", "Y", "Z"]
         self.max = max
         self.coordinate = None
+        self.full_setup = False
         
         
         
@@ -172,10 +174,15 @@ class Stylus():
     
     def setup(self):
         #first set all the motors to 0
+        setup_motor = 0
         for motor in [self.X_motor, self.Y_motor, self.Z_motor] :
             if not motor == None:
+                setup_motor += 1
                 motor.reset()
                 print(f"Reseting the {motor.name} motor")
+        
+        if setup_motor == 3 :
+            self.full_setup = True
         
         print("The Stylus was setup sucessfully")
         #set the coordinate to the default
@@ -243,7 +250,18 @@ class Stylus():
         else :
             self.go_to([-1, -1, 15])
             return print("The Stylus is up /!\ ")
+        
+        
+        
+    def down(self) :
+        if self.Z_motor == None :
+            return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
+        else :
+            self.go_to([-1, -1, 0])
+            return print("The Stylus is up /!\ ")
     
     
-
+    def circle(self, radius : int):
+        #first, verify all the motor
+        pass
     
