@@ -1,6 +1,7 @@
 from time import sleep
 import RPi.GPIO as GPIO
 import math
+import asyncio
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
 delay = 0.002
@@ -263,5 +264,50 @@ class Stylus():
     
     def circle(self, radius : int):
         #first, verify all the motor
-        pass
+        print("Naaah, i was to lazy to code that one, sorry :>")
+        
+        
+    def line(self, starting : list[int, int], end : list[int, int], mode : str):
+        #first put the pen up
+        self.up()
+        
+        #after that, get to the starting point 
+        self.go_to[starting[0], starting[1], -1]
+        
+        #calc the motion so when can create tow async tasks
+        if mode == "point" :
+            x_motion_value = end[0] - starting[0]
+            y_motion_value = end[1] - starting[1]
+        
+        elif mode == "vector" :
+            x_motion_value = end[0]
+            y_motion_value = end[1]
+            
+        else :
+            return print("Wrong mode choosen, please select 'point' or 'vector' .")
+        
+        #now that we have to motion for both of the axis, we just have to create tow async task
+        async def x_motion_task(self, x_motion):
+            #do the motion we deffined previously
+            self.move_axis("X", movement=x_motion)
+            
+        async def y_motion_task(self, y_motion):
+            #do the motion we deffined previously
+            self.move_axis("Y", movement=y_motion)
+            
+        #now, we just have to put the pen down, and do both tasks at the same time
+        #create the async func for the tasks
+        async def draw():
+            asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))
+        
+        #put the pen down
+        self.down()
+        
+        #run the task
+        asyncio.run(draw)
+        
+        #put the pen up
+        self.up()
+        
+        return print("The line was drawn sucessfully !")
     
