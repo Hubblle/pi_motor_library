@@ -47,13 +47,7 @@ Main_stylus.setup()
 step_count = SPR * 16
 
 try:
-    input("Press enter to start the program")
-    while True :
-        user_input = input("Please, enter the next coordinates :")
-        next_co  = list(user_input.split(", "))
-        for i in range(len(next_co)) :
-            next_co[i] = int(next_co[i])
-        Main_stylus.go_to(next_co)
+    pass
             
 except KeyboardInterrupt :
     #stop the board and cleanup
