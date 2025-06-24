@@ -267,6 +267,7 @@ class Stylus():
         print("Naaah, i was to lazy to code that one, sorry :>")
         
         
+        
     def line(self, starting : list[int, int], end : list[int, int], mode : str):
         #first put the pen up
         self.up()
@@ -296,18 +297,16 @@ class Stylus():
             self.move_axis("Y", movement=y_motion)
             
         #now, we just have to put the pen down, and do both tasks at the same time
-        #create the async func for the tasks
         async def draw():
             asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))
         
-        #put the pen down
-        self.down()
-        
-        #run the task
         asyncio.run(draw)
         
-        #put the pen up
+        #at the end, we put the pen up again, and print the result.
+        
         self.up()
         
         return print("The line was drawn sucessfully !")
+        
+        
     
