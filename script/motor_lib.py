@@ -298,7 +298,7 @@ class Stylus():
             
         #now, we just have to put the pen down, and do both tasks at the same time
         async def draw():
-            asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))
+            await asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))
         
         asyncio.run(draw)
         
