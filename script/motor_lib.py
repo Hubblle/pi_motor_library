@@ -273,7 +273,7 @@ class Stylus():
         self.up()
         
         #after that, get to the starting point 
-        self.go_to[starting[0], starting[1], -1]
+        self.go_to([starting[0], starting[1], -1])
         
         #calc the motion so when can create tow async tasks
         if mode == "point" :
