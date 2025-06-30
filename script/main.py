@@ -38,7 +38,7 @@ Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1)
 Z_motor.setup()
 
 
-Main_stylus = Stylus([1340, 1271, 6530])
+Main_stylus = Stylus([2599, 2543, 6530])
 Main_stylus.add_motor(Y_motor, "Y")
 Main_stylus.add_motor(X_motor, "X")
 Main_stylus.add_motor(Z_motor, "Z")

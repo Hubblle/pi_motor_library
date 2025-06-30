@@ -4,7 +4,8 @@ import math
 import asyncio
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
-delay = 0.002
+delay = 0.0005 # min 0.00001 acording to the datasheet (and that's sheet (sith : that's a joke))
+# this is actually the min delay that's work in 1/2 micro step mode
 
 def locate(element, input_list : list) :
     for i in range(len(input_list)) :
@@ -249,7 +250,7 @@ class Stylus():
         if self.Z_motor == None :
             return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
         else :
-            self.go_to([-1, -1, 100])
+            self.go_to([-1, -1, 200])
             return print("The Stylus is up /!\ ")
         
         
@@ -259,7 +260,7 @@ class Stylus():
             return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
         else :
             self.go_to([-1, -1, 0])
-            return print("The Stylus is up /!\ ")
+            return print("The Stylus is down /!\ ")
     
     
     def circle(self, radius : int):
