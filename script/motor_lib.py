@@ -276,6 +276,7 @@ class Stylus():
         #after that, get to the starting point 
         self.go_to([starting[0], starting[1], -1])
         
+        self.down()
         #calc the motion so when can create tow async tasks
         if mode == "point" :
             x_motion_value = end[0] - starting[0]
@@ -291,11 +292,12 @@ class Stylus():
         #now that we have to motion for both of the axis, we just have to create tow async task
         async def x_motion(self, x_motion):
             #do the motion we deffined previously
-            self.move_axis(1, movement=x_motion)
+            asyncio.wait(0.0005)
+            self.move_axis(0, movement=x_motion)
             
         async def y_motion(self, y_motion):
             #do the motion we deffined previously
-            self.move_axis(2, movement=y_motion)
+            self.move_axis(1, movement=y_motion)
             
         #now, we just have to put the pen down, and do both tasks at the same time
         async def draw():
