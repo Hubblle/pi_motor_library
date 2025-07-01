@@ -55,7 +55,8 @@ except KeyboardInterrupt :
     GPIO.cleanup()
     exit()
 
-#stop the board and cleanup
-GPIO.output(EN, GPIO.HIGH)
-GPIO.cleanup()
-exit()
+def cleanup():
+    #stop the board and cleanup
+    GPIO.output(EN, GPIO.HIGH)
+    GPIO.cleanup()
+    exit()
