@@ -289,19 +289,23 @@ class Stylus():
             return print("Wrong mode choosen, please select 'point' or 'vector' .")
         
         #now that we have to motion for both of the axis, we just have to create tow async task
-        async def x_motion_task(self, x_motion):
+        async def x_motion(self, x_motion):
             #do the motion we deffined previously
             self.move_axis("X", movement=x_motion)
             
-        async def y_motion_task(self, y_motion):
+        async def y_motion(self, y_motion):
             #do the motion we deffined previously
             self.move_axis("Y", movement=y_motion)
             
         #now, we just have to put the pen down, and do both tasks at the same time
-        """async def draw():
-            await asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))"""
+        async def draw():
+            x_motion_task = asyncio.create_task(x_motion(x_motion_value))
+            y_motion_task = asyncio.create_task(y_motion(y_motion_value))
+            
+            await x_motion_task
+            await y_motion_task
         
-        asyncio.run(asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value)))
+        asyncio.run(draw())
         
         #at the end, we put the pen up again, and print the result.
         
