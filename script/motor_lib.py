@@ -50,7 +50,7 @@ class Motor:
 
         
         GPIO.output(self.DIR, self.dir_up)
-        print(f"The motor {self.name} is going up for {step} 1/16 steps.")
+        print(f"The motor {self.name} is going up for {step} steps.")
         STEP = self.STEP
         for i in range(step):
             GPIO.output(STEP, 1)
@@ -78,7 +78,7 @@ class Motor:
 
         
         GPIO.output(self.DIR, self.dir_down)
-        print(f"The motor {self.name} is going down for {step} 1/16 steps.")
+        print(f"The motor {self.name} is going down for {step} steps.")
         for i in range(step):
             GPIO.output(self.STEP, GPIO.HIGH)
             sleep(delay)
@@ -298,10 +298,10 @@ class Stylus():
             self.move_axis("Y", movement=y_motion)
             
         #now, we just have to put the pen down, and do both tasks at the same time
-        async def draw():
-            await asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))
+        """async def draw():
+            await asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value))"""
         
-        asyncio.run(draw)
+        asyncio.run(asyncio.gather(x_motion_task(self=self, x_motion=x_motion_value), y_motion_task(self=self, y_motion=y_motion_value)))
         
         #at the end, we put the pen up again, and print the result.
         
