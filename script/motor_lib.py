@@ -269,48 +269,83 @@ class Stylus():
         
         
         
-    def line(self, starting : list[int, int], end : list[int, int], mode : str):
+    def line(self, starting : list[int, int], end : list[int, int]):
         #first put the pen up
         self.up()
+
+        #check if the max isn't exceded
+        if end[0] > self.max[0]:
+            self.down()
+            return print(f"Sorry, but the given point is outside of the limit for the X axis, you gaved {end[0]} and the max is {self.max[0]}")
         
-        #after that, get to the starting point 
-        self.go_to([starting[0], starting[1], -1])
+        if end[1] > self.max[1]:
+            self.down()
+            return print(f"Sorry, but the given point is outside of the limit for the X axis, you gaved {end[1]} and the max is {self.max[1]}")
         
+        
+        print("Starting the processing of the value with the bresenham algorithm")
+        #use the bresenham algorithm to get all the pos of the x and y axis
+        # define everything we need
+        coordinate_by_step = []
+        
+        x0, y0 = starting
+        x1, y1 = end
+        
+        dx = abs(x1 - x0)
+        dy = abs(y1 - y0)
+        sx = 1 if x1 >= x0 else -1
+        sy = 1 if y1 >= y0 else -1
+        
+        if dx > dy:
+            err = dx // 2
+            while x0 != x1:
+                coordinate_by_step.append([x0, y0])
+                print([x0, y0])
+                err -= dy
+                if err < 0:
+                    y0 += sy
+                    err += dx
+                x0 += sx
+        else:
+            err = dy // 2
+            while y0 != y1:
+                coordinate_by_step.append([x0, y0])
+                print([x0, y0])
+                err -= dx
+                if err < 0:
+                    x0 += sx
+                    err += dy
+                y0 += sy
+        coordinate_by_step.append([x1, y1])
+        print("All value have been processed")
+        
+        #get to the starting point
+        self.go_to(starting[0], starting[1], -1)
         self.down()
-        #calc the motion so when can create tow async tasks
-        if mode == "point" :
-            x_motion_value = end[0] - starting[0]
-            y_motion_value = end[1] - starting[1]
+        #remove the first coordinate since we already got there
+        coordinate_by_step.__delitem__(0)
         
-        elif mode == "vector" :
-            x_motion_value = end[0]
-            y_motion_value = end[1]
-            
-        else :
-            return print("Wrong mode choosen, please select 'point' or 'vector' .")
+        print("Processing the movement based on the value")
+        mov_by_step = []
         
-        #now that we have to motion for both of the axis, we just have to create tow async task
-        async def x_motion(self, x_motion):
-            #do the motion we deffined previously
-            asyncio.wait(0.0005)
-            self.move_axis(0, movement=x_motion)
-            
-        async def y_motion(self, y_motion):
-            #do the motion we deffined previously
-            self.move_axis(1, movement=y_motion)
-            
-        #now, we just have to put the pen down, and do both tasks at the same time
-        async def draw():
-            x_motion_task = asyncio.create_task(x_motion(self, x_motion_value))
-            y_motion_task = asyncio.create_task(y_motion(self, y_motion_value))
-            
-            await x_motion_task
-            await y_motion_task
+        last_co = [starting[0], starting[1]]
         
-        asyncio.run(draw())
+        for coordinate in coordinate_by_step :
+            mov = [coordinate[0]-last_co[0], coordinate[1]-last_co[1]]
+            print(mov)
+            mov_by_step.append(mov)
+            last_co = coordinate
+            
+        #Now, we do the movement for each axis and each step
+        for mov in mov_by_step:
+            self.move_axis(0, mov[0])
+            self.move_axis(1, mov[1])
+        
+        #Now, actualise the coordinates
+        self.coordinate[0] = end[0]
+        self.coordinate[1] = end[1]
         
         #at the end, we put the pen up again, and print the result.
-        
         self.up()
         
         return print("The line was drawn sucessfully !")
