@@ -320,7 +320,7 @@ class Stylus():
         print("All value have been processed")
         
         #get to the starting point
-        self.go_to(starting[0], starting[1], -1)
+        self.go_to([starting[0], starting[1], -1])
         self.down()
         #remove the first coordinate since we already got there
         coordinate_by_step.__delitem__(0)
