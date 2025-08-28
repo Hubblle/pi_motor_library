@@ -7,12 +7,6 @@ SPR = 200   # Steps per Revolution (360 / 1.8)
 delay = 0.0005 # min 0.00001 acording to the datasheet (and that's sheet (sith : that's a joke))
 # this is actually the min delay that's work in 1/2 micro step mode
 
-def locate(element, input_list : list) :
-    for i in range(len(input_list)) :
-        if input_list[i] == element:
-            return i
-        
-    return None
         
         
 
