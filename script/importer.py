@@ -122,7 +122,7 @@ Main_stylus.setup()
 
 if type == "raw":
     starting = points[0]
-    starting[2] = -1
+    starting.append(-1)
     Main_stylus.go_to(starting)
     del points[0]
     for values in points:

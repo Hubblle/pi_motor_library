@@ -199,7 +199,7 @@ class Stylus():
             if next_coordinate[i] == -1 :
                 pass
             
-            elif next_coordinate[i] - self.coordinate[i] != 0 and i == None :
+            elif next_coordinate[i] - self.coordinate[i] != 0 and motor_list[i] == None :   
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
             
             elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
