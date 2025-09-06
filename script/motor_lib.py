@@ -350,6 +350,7 @@ class Stylus():
         self.coordinate[1] = end[1]
         
         #at the end, we put the pen up again, and print the result.
-        self.up()
+        if reset_pos == True:
+            self.up()
         
         return print("The line was drawn sucessfully !")
