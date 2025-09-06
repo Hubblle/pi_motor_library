@@ -126,7 +126,11 @@ if type == "raw":
     del points[0]
     for values in points:
         print(f"Drawing line to {values} ")
-        Main_stylus.line(starting, values, False)
+        try:
+            Main_stylus.line(starting, values, False)
+        except:
+            print("Error, value out of range !")
+            exit()
         starting = values
         
 if type == "processed":

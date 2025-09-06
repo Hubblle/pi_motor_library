@@ -191,7 +191,8 @@ class Stylus():
         motor_list = [self.X_motor, self.Y_motor, self.Z_motor]
         #cannot move if the stylus isn't setup :
         if self.coordinate == None :
-            return print("Error, the stylus wasn't setup yet.")
+            print("Error, the stylus wasn't setup yet.")
+            raise Exception
         
 
         for i in range(len(self.co_list)) :
@@ -202,7 +203,8 @@ class Stylus():
                 return print(f"Error, you tried to move an axis wich coresponding motor wasn't setup! Please setup the {self.co_list[i]} motor.")
             
             elif next_coordinate[i] > self.max[i] or next_coordinate[i] < 0 :
-                return print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
+                print(f"Error, you tried to reach a coordinate that is out of reach! The max for the {self.co_list[i]} axis is {self.max[i]} and min is 0, you tried {next_coordinate[i]}")
+                raise Exception
             
             elif next_coordinate[i] != self.coordinate[i] :
                 mouvement = next_coordinate[i] - self.coordinate[i]
