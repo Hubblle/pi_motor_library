@@ -9,7 +9,7 @@ import os
 #Import the pi lib stuff
 import motor_lib as mb
 from motor_lib import Motor, Stylus
-import GPIO
+import RPi.GPIO as GPIO
 
 #list all files of the generation folder
 id = 0
@@ -156,3 +156,5 @@ if type == "processed":
     Main_stylus[0] += coordinates[0]
     Main_stylus[1] += coordinates[1]
     print("Your line was drawn sucessfully !")
+
+GPIO.cleanup()
