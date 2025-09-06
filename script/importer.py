@@ -73,7 +73,7 @@ if type == "raw":
 elif type == "processed":
     #get everything we need
     try:
-        start : list = data["start"]
+        start = data["start"]
         coordinates = data["coordinates"]
         movement = data["movement"]
         max_y = data["max_y"]
@@ -121,7 +121,7 @@ Main_stylus.add_motor(Z_motor, "Z")
 Main_stylus.setup()
 
 if type == "raw":
-    starting : list = points[0]
+    starting = points[0]
     Main_stylus.go_to(starting.append(-1))
     del points[0]
     for values in points:
