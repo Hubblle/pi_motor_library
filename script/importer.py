@@ -130,6 +130,7 @@ if type == "raw":
             Main_stylus.line(starting, values, False)
         except:
             print("Error, value out of range !")
+            GPIO.cleanup()
             exit()
         starting = values
         
@@ -137,14 +138,17 @@ if type == "processed":
     #Check if the max arent exceded 
     if max_x > Main_stylus.max[0]:
         print(f"Error, the X maximum for you program is more than the maximum of the axis; {max_x} > {Main_stylus.max[0]}")
+        GPIO.cleanup()
         exit(1)
     if max_y > Main_stylus.max[1]:
         print(f"Error, the Y maximum for you program is more than the maximum of the axis; {max_y} > {Main_stylus.max[1]}")
+        GPIO.cleanup()
         exit(1)
         
     try:
         Main_stylus.go_to(start.append(-1))
     except:
+        GPIO.cleanup()
         exit()
     
     
