@@ -121,8 +121,8 @@ Main_stylus.add_motor(Z_motor, "Z")
 Main_stylus.setup()
 
 if type == "raw":
-    starting = points[0]
-    Main_stylus.go_to(starting)
+    starting : list = points[0]
+    Main_stylus.go_to(starting.append(-1))
     del points[0]
     for values in points:
         print(f"Drawing line to {values} ")
