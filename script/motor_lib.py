@@ -4,7 +4,7 @@ import math
 import asyncio
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
-delay = 0.0005 # min 0.00001 acording to the datasheet (and that's sheet (sith : that's a joke))
+delay = 0.000025 # min 0.00001 acording to the datasheet (and that's sheet (sith : that's a joke))
 # this is actually the min delay that's work in 1/2 micro step mode
 
         
