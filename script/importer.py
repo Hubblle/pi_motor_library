@@ -124,6 +124,7 @@ if type == "raw":
     starting = points[0]
     starting.append(-1)
     Main_stylus.go_to(starting)
+    del starting[2]
     del points[0]
     for values in points:
         print(f"Drawing line to {values} ")
