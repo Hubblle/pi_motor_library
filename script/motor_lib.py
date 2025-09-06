@@ -263,19 +263,26 @@ class Stylus():
         
         
         
-    def line(self, starting : list[int, int], end : list[int, int]):
+    def line(self, starting : list[int, int], end : list[int, int], reset_pos : bool = True):
         #first put the pen up
-        self.up()
+        if reset_pos==True:
+            self.up()
 
         #check if the max isn't exceded
         if end[0] > self.max[0]:
             self.down()
-            return print(f"Sorry, but the given point is outside of the limit for the X axis, you gaved {end[0]} and the max is {self.max[0]}")
+            print(f"Sorry, but the given point is outside of the limit for the X axis, you gaved {end[0]} and the max is {self.max[0]}")
+            raise Exception
         
         if end[1] > self.max[1]:
             self.down()
-            return print(f"Sorry, but the given point is outside of the limit for the X axis, you gaved {end[1]} and the max is {self.max[1]}")
+            print(f"Sorry, but the given point is outside of the limit for the Y axis, you gaved {end[1]} and the max is {self.max[1]}")
+            raise Exception
         
+        if starting[0] == -1:
+            starting[0] == coordinate[0]
+        if starting[1] == -1:
+            starting[1] == coordinate[0]
         
         print("Starting the processing of the value with the bresenham algorithm")
         #use the bresenham algorithm to get all the pos of the x and y axis
@@ -314,7 +321,8 @@ class Stylus():
         print("All value have been processed")
         
         #get to the starting point
-        self.go_to([starting[0], starting[1], -1])
+        if reset_pos == True:
+            self.go_to([starting[0], starting[1], -1])
         self.down()
         #remove the first coordinate since we already got there
         coordinate_by_step.__delitem__(0)
@@ -343,6 +351,3 @@ class Stylus():
         self.up()
         
         return print("The line was drawn sucessfully !")
-        
-        
-    

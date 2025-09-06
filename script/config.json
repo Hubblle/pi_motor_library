@@ -1,0 +1,19 @@
+{
+    "Z_motor_info" : {
+    "DIR" : 6, 
+    "STEP" : 5, 
+    "SWITCH" : 13 
+},
+
+    "X_motor_info" : {
+    "DIR" : 27, 
+    "STEP" : 17, 
+    "SWITCH" : 22 
+    },
+
+    "Y_motor_info" : {
+    "DIR" : 9,
+    "STEP" : 10,
+    "SWITCH" : 11 
+    }
+}

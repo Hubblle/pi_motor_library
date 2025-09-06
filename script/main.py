@@ -1,24 +1,15 @@
 from time import sleep
 import RPi.GPIO as GPIO
+import json
 from motor_lib import Motor, Stylus
 
-Z_motor_info = {
-    "DIR" : 6, # Direction GPIO Pin
-    "STEP" : 5, # Step GPIO Pin
-    "SWITCH" : 13 # Switch GPIO Pin
-}
+with open("./script/config.json", "r") as raw_conf:
+    config = json.load(raw_conf)
+Z_motor_info = config["Z_motor_info"]
 
-X_motor_info = {
-    "DIR" : 27, # Direction GPIO Pin
-    "STEP" : 17, # Step GPIO Pin
-    "SWITCH" : 22 # Switch GPIO Pin
-}
+X_motor_info = config["X_motor_info"]
 
-Y_motor_info = {
-    "DIR" : 9, # Direction GPIO Pin
-    "STEP" : 10, # Step GPIO Pin
-    "SWITCH" : 11 # Switch GPIO Pin
-}
+Y_motor_info = config["Y_motor_info"]
 
 CW = 1     # Clockwise Rotation
 CCW = 0    # Counterclockwise Rotation
