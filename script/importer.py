@@ -73,11 +73,12 @@ if type == "raw":
 elif type == "processed":
     #get everything we need
     try:
-        start = data["start"]
-        coordinates = data["coordinates"]
-        movement = data["movement"]
         max_y = data["max_y"]
         max_x = data["max_x"]
+        movement = []
+        for i in range(len(data["list"])):
+            movement.append({"start":data["start"], "coordinates":data["coordinates"], "movement":data["movement"]})
+            
     except:
         print("Warning, your file don't seems to be in the correct format, please reffer to the example.drw")
         exit(1)
@@ -146,21 +147,25 @@ if type == "processed":
         print(f"Error, the Y maximum for you program is more than the maximum of the axis; {max_y} > {Main_stylus.max[1]}")
         GPIO.cleanup()
         exit(1)
+     
+    for i in range(len(movement)):    
+        try:
+            Main_stylus.go_to(movement[i]["start"].append(-1))
+        except:
+            GPIO.cleanup()
+            exit()
         
-    try:
-        Main_stylus.go_to(start.append(-1))
-    except:
-        GPIO.cleanup()
-        exit()
-    
-    
+        #so we are not slow during the motors moves
+        moves=[]
+        for mov in movement[i]["movement"]:
+            moves.append(mov)
+            
+        for mov in moves:
+                Main_stylus.move_axis(0, mov[0])
+                Main_stylus.move_axis(1, mov[1])
         
-    for mov in movement:
-            Main_stylus.move_axis(0, mov[0])
-            Main_stylus.move_axis(1, mov[1])
-    
-    Main_stylus[0] += coordinates[0]
-    Main_stylus[1] += coordinates[1]
-    print("Your line was drawn sucessfully !")
+        Main_stylus[0] += movement[i]["coordinates"][0]
+        Main_stylus[1] += movement[i]["coordinates"][1]
+        print(f"Line {i} was drawn sucessfully !")
 
 GPIO.cleanup()
