@@ -77,7 +77,7 @@ elif type == "processed":
         max_x = data["max-x"]
         movement = []
         for i in range(len(data["list"])):
-            movement.append({"start":data["start"], "coordinates":data["coordinates"], "movement":data["movement"]})
+            movement.append({"start":i["start"], "coordinates":i["coordinates"], "movement":i["movement"]})
             
     except:
         print("Warning, your file don't seems to be in the correct format, please reffer to the example.drw")
