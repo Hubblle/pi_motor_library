@@ -73,8 +73,8 @@ if type == "raw":
 elif type == "processed":
     #get everything we need
     try:
-        max_y = data["max_y"]
-        max_x = data["max_x"]
+        max_y = data["max-y"]
+        max_x = data["max-x"]
         movement = []
         for i in range(len(data["list"])):
             movement.append({"start":data["start"], "coordinates":data["coordinates"], "movement":data["movement"]})
@@ -92,9 +92,7 @@ with open("./script/config.json", "r") as raw_conf:
     config = json.load(raw_conf)
     
 Z_motor_info = config["Z_motor_info"]
-
 X_motor_info = config["X_motor_info"]
-
 Y_motor_info = config["Y_motor_info"]
 
 CW = 1     # Clockwise Rotation
