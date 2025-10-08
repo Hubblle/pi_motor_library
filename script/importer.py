@@ -76,7 +76,7 @@ elif type == "processed":
         max_y = data["max-y"]
         max_x = data["max-x"]
         movement = []
-        for i in range(len(data["list"])):
+        for i in data["list"]:
             movement.append({"start":i["start"], "coordinates":i["coordinates"], "movement":i["movement"]})
             
     except:
