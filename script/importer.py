@@ -143,7 +143,8 @@ if type == "processed":
         print(f"Error, the Y maximum for you program is more than the maximum of the axis; {max_y} > {Main_stylus.max[1]}")
         GPIO.cleanup()
         exit(1)
-     
+    
+    print(movement)
     for i in movement:
         try:
             Main_stylus.go_to(i["start"].append(-1))
