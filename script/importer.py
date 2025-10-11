@@ -75,9 +75,7 @@ elif type == "processed":
     try:
         max_y = data["max-y"]
         max_x = data["max-x"]
-        movement = []
-        for i in data["list"]:
-            movement.append({"start":i["start"], "coordinates":i["coordinates"], "movement":i["movement"]})
+        movement = data["list"]
             
     except:
         print("Warning, your file don't seems to be in the correct format, please reffer to the example.drw")
@@ -146,24 +144,23 @@ if type == "processed":
         GPIO.cleanup()
         exit(1)
      
-    for i in range(len(movement)):    
+    for i in movement:
         try:
-            Main_stylus.go_to(movement[i]["start"].append(-1))
+            Main_stylus.go_to(i["start"].append(-1))
         except:
             GPIO.cleanup()
             exit()
-        
+            print("Here") #seriously
+                    
         #so we are not slow during the motors moves
-        moves=[]
-        for mov in movement[i]["movement"]:
-            moves.append(mov)
+        moves=i["movement"]
             
         for mov in moves:
-                Main_stylus.move_axis(0, mov[0])
-                Main_stylus.move_axis(1, mov[1])
+            Main_stylus.move_axis(0, mov[0])
+            Main_stylus.move_axis(1, mov[1])
         
-        Main_stylus[0] += movement[i]["coordinates"][0]
-        Main_stylus[1] += movement[i]["coordinates"][1]
+        Main_stylus.coordinate[0] += i["coordinates"][0]
+        Main_stylus.coordinate[1] += i["coordinates"][1]
         print(f"Line {i} was drawn sucessfully !")
 
 GPIO.cleanup()
