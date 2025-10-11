@@ -147,7 +147,8 @@ if type == "processed":
     print(movement)
     for i in movement:
         try:
-            Main_stylus.go_to(i["start"].append(-1))
+            starting=i["start"].append(-1)
+            Main_stylus.go_to(starting)
         except:
             GPIO.cleanup()
             exit()
