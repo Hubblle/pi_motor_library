@@ -147,16 +147,17 @@ if type == "processed":
     print(movement)
     for i in movement:
         try:
-            starting=i["start"].append(-1)
+            starting:list=i["start"]
+            Main_stylus.up()
             Main_stylus.go_to(starting)
         except:
             GPIO.cleanup()
             exit()
-            print("Here") #seriously
                     
         #so we are not slow during the motors moves
         moves=i["movement"]
-            
+
+        Main_stylus.down
         for mov in moves:
             Main_stylus.move_axis(0, mov[0])
             Main_stylus.move_axis(1, mov[1])
