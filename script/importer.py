@@ -150,14 +150,15 @@ if type == "processed":
             starting:list=i["start"]
             Main_stylus.up()
             Main_stylus.go_to(starting)
-        except:
+        except Exception as e:
             GPIO.cleanup()
+            print(e)
             exit()
                     
         #so we are not slow during the motors moves
         moves=i["movement"]
 
-        Main_stylus.down
+        Main_stylus.down()
         for mov in moves:
             Main_stylus.move_axis(0, mov[0])
             Main_stylus.move_axis(1, mov[1])
