@@ -148,6 +148,7 @@ if type == "processed":
     for i in movement:
         try:
             starting:list=i["start"]
+            starting.append(-1)
             Main_stylus.up()
             Main_stylus.go_to(starting)
         except Exception as e:
