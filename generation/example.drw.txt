@@ -16,16 +16,17 @@ The file has to "type" :
 
 {
     "type":"processed"
+    "max-y": 560 #the max y value reched from the start (used to prevent motors from getting out of range)
+    "max-x": 890 #same with x
     "list":[
         {"start":[4, 6] #where to start the movement, -1 is use like a placeholder for the actual coordinates
         "coordinates":[34, 56] #It's actualy the coordinates of the gobal vector (the sum of every one writen in the movement part)
-        "max-y": 560 #the max y value reched from the start (used to prevent motors from getting out of range)
-        "max-x": 890 #same with x
         "movement":[
             [1, 2]
             [1, 1]
             [1, 1] #movement in step, in the form of [x mov, y mov]
-        ]},
+            ]
+        },
 
         # We can add more movement here so they are separated by an empty space (the pen go to the start while been up)
     ]
