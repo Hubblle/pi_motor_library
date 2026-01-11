@@ -4,8 +4,8 @@ import math
 import asyncio
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
-delay = 0.000025 # min 0.00001 acording to the datasheet (and that's sheet (sith : that's a joke))
-# this is actually the min delay that's work in 1/2 micro step mode
+delay = 0.000025 # min 0.00001 according to the datasheet
+# this is actually the min delay which work in 1/2 micro step mode
 
         
         
@@ -90,8 +90,8 @@ class Motor:
         print(f"Setting the motor {self.name} to 0 on the main axis.")
         GPIO.output(self.DIR, self.dir_down)
         while True :
-            print(GPIO.input(self.SWITCH))
             if GPIO.input(self.SWITCH) == 1 :
+                print("  DEBUG: Switch signal detected")
                 sleep(0.2)
                 if GPIO.input(self.SWITCH) == 0 :
                     pass
@@ -105,7 +105,7 @@ class Motor:
                 
     def get_max(self):
         if self.is_setup == 0:
-            print("This mottor wasn't setup.")
+            print("This motor wasn't setup.")
             return print("Aborting the program !")
         
         
@@ -155,7 +155,7 @@ class Stylus():
         if not axis in ["X", "Y", "Z"] :
             return print("The selected axis isn't right !")
         
-        #add the motor to the coresponding axis
+        #add the motor to the corresponding axis
         if axis == "X":
             self.X_motor = motor
         elif axis == "Y":
@@ -174,13 +174,14 @@ class Stylus():
         for motor in [self.X_motor, self.Y_motor, self.Z_motor] :
             if not motor == None:
                 setup_motor += 1
-                motor.reset()
                 print(f"Reseting the {motor.name} motor")
+                motor.reset()
+                print(f"The {motor.name} was reset successfully")
         
         if setup_motor == 3 :
             self.full_setup = True
         
-        print("The Stylus was setup sucessfully")
+        print("The Stylus was setup successfully")
         #set the coordinate to the default
         self.coordinate = [0, 0, 0]
         
