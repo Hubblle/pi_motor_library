@@ -74,9 +74,9 @@ class Motor:
         GPIO.output(self.DIR, self.dir_down)
         print(f"The motor {self.name} is going down for {step} steps.")
         for i in range(step):
-            GPIO.output(self.STEP, GPIO.HIGH)
+            GPIO.output(self.STEP, 1)
             sleep(delay)
-            GPIO.output(self.STEP, GPIO.LOW)
+            GPIO.output(self.STEP, 0)
             sleep(delay)
             
             
@@ -98,9 +98,9 @@ class Motor:
                 elif GPIO.input(self.SWITCH) == 1:
                     return print(f"The motor {self.name} was set to 0 on the main axis !")
             elif GPIO.input(self.SWITCH) == 0 :
-                GPIO.output(self.STEP, GPIO.HIGH)
+                GPIO.output(self.STEP, 1)
                 sleep(delay)
-                GPIO.output(self.STEP, GPIO.LOW)
+                GPIO.output(self.STEP, 0)
                 sleep(delay)
                 
     def get_max(self):
