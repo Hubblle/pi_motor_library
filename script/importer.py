@@ -32,7 +32,7 @@ while True:
 
     try:
         choice = int(input(">>> "))
-    except:
+    except ValueError:
         for i in range(5):
             print("\n")
         print("Error, you must input a number !")
