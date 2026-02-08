@@ -4,14 +4,11 @@ import math
 import asyncio
 
 SPR = 200   # Steps per Revolution (360 / 1.8)
-delay = 0.000025 # min 0.00001 according to the datasheet
-# this is actually the min delay which work in 1/2 micro step mode
+delay = 5e-6
 
-        
-        
 
 class Motor:
-    def __init__(self, motor_info : dict, name : str, d_d : int, d_u : int):
+    def __init__(self, motor_info : dict, name : str, d_d : int, d_u : int, offset : int = 0):
         self.motor_info = motor_info
         self.is_setup = 0
         self.name = name
@@ -20,6 +17,7 @@ class Motor:
         self.STEP = motor_info["STEP"]
         self.dir_down = d_d
         self.dir_up = d_u
+        self.offset = offset
         
 
     def setup(self):
@@ -96,6 +94,9 @@ class Motor:
                 if GPIO.input(self.SWITCH) == 0 :
                     pass
                 elif GPIO.input(self.SWITCH) == 1:
+                    #Apply the offset
+                    self.high(self.offset)
+                    
                     return print(f"The motor {self.name} was set to 0 on the main axis !")
             elif GPIO.input(self.SWITCH) == 0 :
                 GPIO.output(self.STEP, 1)
@@ -247,7 +248,7 @@ class Stylus():
         if self.Z_motor == None :
             return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
         else :
-            self.go_to([-1, -1, 200])
+            self.go_to([-1, -1, 800])
             return print("The Stylus is up /!\ ")
         
         
@@ -321,7 +322,7 @@ class Stylus():
                     err += dy
                 y0 += sy
         coordinate_by_step.append([x1, y1])
-        print("All value have been processed")
+        print("All values  have been processed")
         
         #get to the starting point
         if reset_pos == True:

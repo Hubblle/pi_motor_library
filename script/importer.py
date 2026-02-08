@@ -101,17 +101,17 @@ EN = 18 # Enable GPIO Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN, GPIO.OUT)
 
-Y_motor = Motor(Y_motor_info, "Y_motor", 0, 1)
+Y_motor = Motor(Y_motor_info, "Y_motor", 1, 0)
 Y_motor.setup()
 
 X_motor = Motor(X_motor_info, "X_motor", 0, 1)
 X_motor.setup()
 
-Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1)
+Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1, offset=Z_motor_info["OFFSET"])
 Z_motor.setup()
 
 
-Main_stylus = Stylus([2599, 2543, 6530])
+Main_stylus = Stylus([X_motor_info["MAX"], Y_motor_info["MAX"], Z_motor_info["MAX"]])
 Main_stylus.add_motor(Y_motor, "Y")
 Main_stylus.add_motor(X_motor, "X")
 Main_stylus.add_motor(Z_motor, "Z")

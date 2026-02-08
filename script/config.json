@@ -2,18 +2,22 @@
     "Z_motor_info" : {
     "DIR" : 6, 
     "STEP" : 5, 
-    "SWITCH" : 13 
+    "SWITCH" : 13,
+    "MAX": 47000,
+    "OFFSET":700
 },
 
     "X_motor_info" : {
     "DIR" : 27, 
     "STEP" : 17, 
-    "SWITCH" : 22 
+    "SWITCH" : 22,
+    "MAX": 20176
     },
 
     "Y_motor_info" : {
     "DIR" : 9,
     "STEP" : 10,
-    "SWITCH" : 11 
+    "SWITCH" : 11,
+    "MAX": 19924
     }
 }
