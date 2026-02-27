@@ -248,7 +248,7 @@ class Stylus():
         if self.Z_motor == None :
             return print("Sorry, the Z motor wasn't setup yet, please, do 'Stylus.add_motor(motor, 'Z')")
         else :
-            self.go_to([-1, -1, 800])
+            self.go_to([-1, -1, 3300])
             return print("The Stylus is up /!\ ")
         
         
