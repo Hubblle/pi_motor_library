@@ -165,5 +165,8 @@ if type == "processed":
             Main_stylus.move_axis(1, mov[1])
         
         print(f"Line {i} was drawn sucessfully !")
+        
 
+Main_stylus.up()
+Main_stylus.go_to([0, 0, -1])
 GPIO.cleanup()
