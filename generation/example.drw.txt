@@ -1,6 +1,6 @@
 The file has to "type" :
 - Raw when it contain directly the coordinates off all the points, so the script has to calculate the movement
-- Processed when it contain all the movement (and aditional information like starting point)
+- Processed when it contain all the movement (and additional information like starting point)
 
 // if raw:
 {
@@ -16,11 +16,11 @@ The file has to "type" :
 
 {
     "type":"processed"
-    "max-y": 560 #the max y value reched from the start (used to prevent motors from getting out of range)
+    "max-y": 560 #the max y value reached from the start (used to prevent motors from getting out of range)
     "max-x": 890 #same with x
     "list":[
         {"start":[4, 6] #where to start the movement, -1 is use like a placeholder for the actual coordinates
-        "coordinates":[34, 56] #It's actualy the coordinates of the gobal vector (the sum of every one writen in the movement part)
+        "coordinates":[34, 56] #It's actually the coordinates of the global vector (the sum of every one written in the movement part)
         "movement":[
             [1, 2]
             [1, 1]

@@ -48,7 +48,7 @@ while True:
             break
 
 
-#import and read the choosen file
+#import and read the chosen file
 selected_filename = [filename for filename, file_id in files_dict.items() if file_id == choice][0]
 try:
     with open(f"./generation/{selected_filename}", "r") as file:
@@ -67,7 +67,7 @@ if type == "raw":
     try:
         points = data["points"]
     except:
-        print("Warning, your file don't seems to be in the correct format, please reffer to the example.drw")
+        print("Warning, your file don't seems to be in the correct format, please refer to the example.drw")
         exit(1)
         
 elif type == "processed":
@@ -78,11 +78,11 @@ elif type == "processed":
         movement = data["list"]
             
     except:
-        print("Warning, your file don't seems to be in the correct format, please reffer to the example.drw")
+        print("Warning, your file don't seems to be in the correct format, please refer to the example.drw")
         exit(1)
 
 else:
-    print("Error, wrong type, please reffer to the example.drw.")
+    print("Error, wrong type, please refer to the example.drw.")
     exit(1)
 
 #here we start to execute the movement
@@ -164,8 +164,6 @@ if type == "processed":
             Main_stylus.move_axis(0, mov[0])
             Main_stylus.move_axis(1, mov[1])
         
-        Main_stylus.coordinate[0] += i["coordinates"][0]
-        Main_stylus.coordinate[1] += i["coordinates"][1]
         print(f"Line {i} was drawn sucessfully !")
 
 GPIO.cleanup()
