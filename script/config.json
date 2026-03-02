@@ -4,7 +4,7 @@
     "STEP" : 5, 
     "SWITCH" : 13,
     "MAX": 47000,
-    "OFFSET":700
+    "OFFSET":1900
 },
 
     "X_motor_info" : {
