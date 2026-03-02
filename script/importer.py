@@ -168,5 +168,5 @@ if type == "processed":
         
 
 Main_stylus.up()
-Main_stylus.go_to([0, 0, -1])
+Main_stylus.go_to([0, Y_motor_info["MAX"], -1])
 GPIO.cleanup()
