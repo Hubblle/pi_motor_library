@@ -8,7 +8,7 @@ delay = 5e-6
 
 
 class Motor:
-    def __init__(self, motor_info : dict, name : str, d_d : int, d_u : int, offset : int = 0):
+    def __init__(self, motor_info : dict, name : str, d_d : int, d_u : int, maximum:int, offset : int = 0, reversed=False):
         self.motor_info = motor_info
         self.is_setup = 0
         self.name = name
@@ -18,6 +18,8 @@ class Motor:
         self.dir_down = d_d
         self.dir_up = d_u
         self.offset = offset
+        self.reversed = reversed
+        self.maximum = maximum
         
 
     def setup(self):
@@ -96,6 +98,11 @@ class Motor:
                 elif GPIO.input(self.SWITCH) == 1:
                     #Apply the offset
                     self.high(self.offset)
+                    
+                    if self.reversed:
+                        self.high(self.maximum)
+                        self.dir_down, self.dir_up = self.dir_up, self.dir_down
+                    
                     
                     return print(f"The motor {self.name} was set to 0 on the main axis !")
             elif GPIO.input(self.SWITCH) == 0 :

@@ -101,13 +101,13 @@ EN = 18 # Enable GPIO Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN, GPIO.OUT)
 
-Y_motor = Motor(Y_motor_info, "Y_motor", 1, 0)
+Y_motor = Motor(Y_motor_info, "Y_motor", 1, 0, maximum=Y_motor_info["MAX"])
 Y_motor.setup()
 
-X_motor = Motor(X_motor_info, "X_motor", 0, 1)
+X_motor = Motor(X_motor_info, "X_motor", 0, 1, maximum=X_motor_info["MAX"], reversed=X_motor_info["REVERSED"])
 X_motor.setup()
 
-Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1, offset=Z_motor_info["OFFSET"])
+Z_motor = Motor(Z_motor_info, "Z_motor", 0, 1, maximum=Z_motor_info["MAX"], offset=Z_motor_info["OFFSET"])
 Z_motor.setup()
 
 

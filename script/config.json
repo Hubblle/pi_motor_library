@@ -11,7 +11,8 @@
     "DIR" : 27, 
     "STEP" : 17, 
     "SWITCH" : 22,
-    "MAX": 20176
+    "MAX": 20176,
+    "REVERSED": true
     },
 
     "Y_motor_info" : {
