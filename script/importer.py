@@ -52,40 +52,12 @@ while True:
 selected_filename = [filename for filename, file_id in files_dict.items() if file_id == choice][0]
 try:
     with open(f"./generation/{selected_filename}", "r") as file:
-        data = json.load(file)
+        r_data = json.load(file)
 except:
     print("Warning, error during the reading of your file, please, make sure to use json syntax")
 
-try:
-    type = data["type"]
-except:
-    print("Warning, your file don't seems to be in the correct format, please, include the 'type' of your file.")
-    exit(1)
-    
-if type == "raw":
-    #get all the points
-    try:
-        points = data["points"]
-    except:
-        print("Warning, your file don't seems to be in the correct format, please refer to the example.drw")
-        exit(1)
-        
-elif type == "processed":
-    #get everything we need
-    try:
-        max_y = data["max-y"]
-        max_x = data["max-x"]
-        movement = data["list"]
-            
-    except:
-        print("Warning, your file don't seems to be in the correct format, please refer to the example.drw")
-        exit(1)
 
-else:
-    print("Error, wrong type, please refer to the example.drw.")
-    exit(1)
 
-#here we start to execute the movement
 with open("./script/config.json", "r") as raw_conf:
     config = json.load(raw_conf)
     
@@ -117,56 +89,87 @@ Main_stylus.add_motor(X_motor, "X")
 Main_stylus.add_motor(Z_motor, "Z")
 Main_stylus.setup()
 
-if type == "raw":
-    starting = points[0]
-    starting.append(-1)
-    Main_stylus.go_to(starting)
-    del starting[2]
-    del points[0]
-    for values in points:
-        print(f"Drawing line to {values} ")
+for data in r_data:
+    try:
+        type = data["type"]
+    except:
+        print("Warning, your file don't seems to be in the correct format, please, include the 'type' of your file.")
+        exit(1)
+        
+    if type == "raw":
+        #get all the points
         try:
-            Main_stylus.line(starting, values, False)
+            points = data["points"]
         except:
-            print("Error, value out of range !")
-            GPIO.cleanup()
-            exit()
-        starting = values
-        
-if type == "processed":
-    #Check if the max arent exceded 
-    if max_x > Main_stylus.max[0]:
-        print(f"Error, the X maximum for you program is more than the maximum of the axis; {max_x} > {Main_stylus.max[0]}")
-        GPIO.cleanup()
-        exit(1)
-    if max_y > Main_stylus.max[1]:
-        print(f"Error, the Y maximum for you program is more than the maximum of the axis; {max_y} > {Main_stylus.max[1]}")
-        GPIO.cleanup()
-        exit(1)
-    
-    print(movement)
-    for i in movement:
+            print("Warning, your file don't seems to be in the correct format, please refer to the example.drw")
+            exit(1)
+            
+    elif type == "processed":
+        #get everything we need
         try:
-            starting:list=i["start"]
-            starting.append(-1)
-            Main_stylus.up()
-            Main_stylus.go_to(starting)
-        except Exception as e:
+            max_y = data["max-y"]
+            max_x = data["max-x"]
+            movement = data["list"]
+                
+        except:
+            print("Warning, your file don't seems to be in the correct format, please refer to the example.drw")
+            exit(1)
+
+    else:
+        print("Error, wrong type, please refer to the example.drw.")
+        exit(1)
+
+    #here we start to execute the movement
+
+    if type == "raw":
+        starting = points[0]
+        starting.append(-1)
+        Main_stylus.go_to(starting)
+        del starting[2]
+        del points[0]
+        for values in points:
+            print(f"Drawing line to {values} ")
+            try:
+                Main_stylus.line(starting, values, False)
+            except:
+                print("Error, value out of range !")
+                GPIO.cleanup()
+                exit()
+            starting = values
+            
+    if type == "processed":
+        #Check if the max arent exceded 
+        if max_x > Main_stylus.max[0]:
+            print(f"Error, the X maximum for you program is more than the maximum of the axis; {max_x} > {Main_stylus.max[0]}")
             GPIO.cleanup()
-            print(e)
-            exit()
-                    
-        #so we are not slow during the motors moves
-        moves=i["movement"]
-
-        Main_stylus.down()
-        for mov in moves:
-            Main_stylus.move_axis(0, mov[0])
-            Main_stylus.move_axis(1, mov[1])
+            exit(1)
+        if max_y > Main_stylus.max[1]:
+            print(f"Error, the Y maximum for you program is more than the maximum of the axis; {max_y} > {Main_stylus.max[1]}")
+            GPIO.cleanup()
+            exit(1)
         
-        print(f"Line {i} was drawn sucessfully !")
-        
+        for i in movement:
+            try:
+                starting:list=i["start"]
+                starting.append(-1)
+                Main_stylus.up()
+                Main_stylus.go_to(starting)
+            except Exception as e:
+                GPIO.cleanup()
+                print(e)
+                exit()
+                        
+            #so we are not slow during the motors moves
+            moves=i["movement"]
 
-Main_stylus.up()
-Main_stylus.go_to([0, Y_motor_info["MAX"], -1])
-GPIO.cleanup()
+            Main_stylus.down()
+            for mov in moves:
+                Main_stylus.move_axis(0, mov[0])
+                Main_stylus.move_axis(1, mov[1])
+            
+            print(f"Line {i} was drawn sucessfully !")
+            
+
+    Main_stylus.up()
+    Main_stylus.go_to([0, Y_motor_info["MAX"], -1])
+    GPIO.cleanup()

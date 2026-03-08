@@ -2,6 +2,11 @@ The file has to "type" :
 - Raw when it contain directly the coordinates off all the points, so the script has to calculate the movement
 - Processed when it contain all the movement (and additional information like starting point)
 
+
+WARNING: the whole file is a list /!\
+
+[ <- don't miss
+
 // if raw:
 {
     "type":"raw"
@@ -10,7 +15,7 @@ The file has to "type" :
         [1, 9]
         [2, 8] #those are example coordinates
     ]
-}   
+},
 
 // if processed:
 
@@ -31,3 +36,5 @@ The file has to "type" :
         # We can add more movement here so they are separated by an empty space (the pen go to the start while been up)
     ]
 }
+
+] <- don't miss
