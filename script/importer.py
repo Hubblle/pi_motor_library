@@ -168,8 +168,8 @@ for data in r_data:
                 Main_stylus.move_axis(1, mov[1])
             
             print(f"Line {i} was drawn sucessfully !")
-            
+        Main_stylus.up()
 
-    Main_stylus.up()
-    Main_stylus.go_to([0, Y_motor_info["MAX"], -1])
-    GPIO.cleanup()
+Main_stylus.up()
+Main_stylus.go_to([0, Y_motor_info["MAX"], -1])
+GPIO.cleanup()
